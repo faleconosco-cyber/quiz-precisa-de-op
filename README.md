@@ -17,17 +17,17 @@ O Apps Script é o projeto **"Leads dos quizzes da bio"**, da conta
 faleconosco@institutorumo.com, implantação "Quizzes da bio v1". Fonte em
 `../quizzes-bio/apps-script-quizzes.js`, e ele atende os quatro quizzes da bio.
 
+O caminho completo está fechado desde 31/08/2026: site publicado → Apps Script →
+planilha **e** RPC `criar_lead_quiz` do Supabase. O cartão nasce na etapa `quiz`,
+com origem "Quiz: precisa de OP", produto `orientacao_adolescente`, o perfil e a
+pontuação nas notas, e a tarefa de WhatsApp vencendo em dois dias. A migration
+`012_quiz_multiplos_funis.sql` está aplicada e a implantação está na Versão 2.
+
 ### O que ainda falta
 
-1. **Chave anon do Supabase** no Apps Script (`SUPABASE_ANON_KEY`). Enquanto
-   estiver com o marcador, `enviarParaCrm` sai na porta e o lead **não vira
-   cartão no CRM**. Vai só pra planilha.
-2. **Migration `012_quiz_multiplos_funis.sql`** aplicada no Supabase do CRM.
-   Sem ela a RPC `criar_lead_quiz` ignora o campo `quiz` e todo lead cai como
-   funil de adolescente com origem genérica. Aplicar **antes** de pôr a chave,
-   senão os primeiros cartões nascem com a origem errada.
-3. **Chave e listas do Brevo**, se quiser a sequência de e-mails rodando. Sem
-   isso o lead entra na planilha e no CRM, só não recebe e-mail.
+**Chave e listas do Brevo**, se quiser a sequência de e-mails rodando. Sem isso o
+lead entra na planilha e vira cartão no CRM, só não recebe e-mail. A sequência do
+Brevo já roda para o quiz 1.1, então mexer lá pede cuidado.
 
 Depois de mexer no Apps Script, salvar não basta: é preciso
 Implantar → Gerenciar implantações → editar → **Nova versão**. Criar uma
