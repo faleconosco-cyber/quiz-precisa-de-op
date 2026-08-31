@@ -8,8 +8,15 @@ import { QUIZ_SLUG } from '../data/quiz'
 // ─── Envio ───────────────────────────────────────────────────────────────────
 // Apps Script único dos quatro quizzes da bio. Ele grava na planilha, manda pro
 // Brevo e chama a RPC criar_lead_quiz do CRM, que abre o cartão no funil.
-// Substituir pela URL gerada em Implantar → Nova implantação → App da Web.
-export const APPS_SCRIPT_URL = 'COLE_A_URL_AQUI'
+// Implantação "Quizzes da bio v1", no projeto "Leads dos quizzes da bio", da
+// conta faleconosco@institutorumo.com.
+//
+// Editar o Apps Script e salvar não muda o que está no ar: é preciso implantar
+// de novo (Implantar → Gerenciar implantações → editar → Nova versão). Se
+// mudar a implantação em vez de criar versão nova, esta URL muda e precisa ser
+// trocada aqui também.
+export const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbwQ4Wcl1U5SUKxTDlJ5JjUwqX5P5_O0TwhXwdlPQxRMvwGec14_sG3eWksGjFSqvuhn/exec'
 
 export function sendLead(data) {
   if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'COLE_A_URL_AQUI') return
