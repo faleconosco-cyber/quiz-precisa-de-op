@@ -1,0 +1,55 @@
+name: Publicar no GitHub Pages
+
+# Cada push na main reconstrói e republica. O build fica fora do repositório,
+# diferente do quiz 1.1, onde o index.html da fonte e o do build disputam o
+# mesmo lugar na raiz e um sobrescreve o outro na hora do deploy.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez. Sem isso, dois pushes seguidos podem publicar fora de ordem.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Confere as 262.144 combinações de resposta antes de publicar. Se alguma
+      # cair fora dos perfis, ou se o perfil 5 sair para quem apontou problema,
+      # o deploy para aqui.
+      - run: npm test
+
+      - run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
