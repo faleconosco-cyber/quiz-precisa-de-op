@@ -6,19 +6,33 @@ Primeira Escolha.
 Nove perguntas, captura de lead depois da terceira, quatro perfis de resultado.
 A pessoa nunca vê pontuação nem sabe qual perfil está sendo formado.
 
-## O que falta pra subir
+## Estado
 
-1. **URL do Apps Script** em `src/lib/lead.js`, linha 12 (`APPS_SCRIPT_URL`).
-   Enquanto estiver `'COLE_A_URL_AQUI'`, o quiz funciona inteiro mas o lead não
-   sai do navegador: não vai pra planilha, nem pro Brevo, nem pro CRM.
-   O script fica em `../quizzes-bio/apps-script-quizzes.js` e atende os quatro
-   quizzes da bio.
+No ar em https://faleconosco-cyber.github.io/quiz-precisa-de-op/, com o card
+ativo em `links.institutorumo.com`. O lead cai na aba **Precisa de OP** da
+planilha "quiz - Descubra se o seu filho precisa de OP", conferido de ponta a
+ponta em 31/08/2026.
+
+O Apps Script é o projeto **"Leads dos quizzes da bio"**, da conta
+faleconosco@institutorumo.com, implantação "Quizzes da bio v1". Fonte em
+`../quizzes-bio/apps-script-quizzes.js`, e ele atende os quatro quizzes da bio.
+
+### O que ainda falta
+
+1. **Chave anon do Supabase** no Apps Script (`SUPABASE_ANON_KEY`). Enquanto
+   estiver com o marcador, `enviarParaCrm` sai na porta e o lead **não vira
+   cartão no CRM**. Vai só pra planilha.
 2. **Migration `012_quiz_multiplos_funis.sql`** aplicada no Supabase do CRM.
    Sem ela a RPC `criar_lead_quiz` ignora o campo `quiz` e todo lead cai como
-   funil de adolescente com origem genérica.
-3. **Repo no GitHub** e Pages a partir de `main` / `(root)`, com Enforce HTTPS.
-4. **Card ativado na bio**, trocando o `<div class="cartao n1 breve">` por
-   `<a href>` com a UTM `utm_content=quiz_precisa_de_op`.
+   funil de adolescente com origem genérica. Aplicar **antes** de pôr a chave,
+   senão os primeiros cartões nascem com a origem errada.
+3. **Chave e listas do Brevo**, se quiser a sequência de e-mails rodando. Sem
+   isso o lead entra na planilha e no CRM, só não recebe e-mail.
+
+Depois de mexer no Apps Script, salvar não basta: é preciso
+Implantar → Gerenciar implantações → editar → **Nova versão**. Criar uma
+implantação nova em vez de versão nova troca a URL, e aí `src/lib/lead.js`
+precisa ser atualizado junto.
 
 ## Como rodar
 
