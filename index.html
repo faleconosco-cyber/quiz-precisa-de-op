@@ -31,16 +31,22 @@
          disparados antes de a tag deles terminar de carregar. -->
     <script>window.dataLayer = window.dataLayer || []</script>
 
-    <!-- Google Analytics 4: descomentar e trocar o ID quando ela decidir medir
-         este quiz no GA além do Pixel. Sem isso, src/lib/analytics.js
-         simplesmente não encontra gtag e não dispara nada.
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- Google Analytics 4, ligado em 07/10/2026.
+         Propriedade "Instituto Rumo", G-FW3VTE6518, a mesma do site e das
+         landings. Dominio diferente, mesma gaveta: nos relatorios, separe por
+         "hostname" para ver so este quiz.
+         De agosto ate aqui este bloco ficou comentado, com um ID de exemplo
+         dentro. Nao carregava nada: conferido no navegador, o gtag nem existia
+         na pagina, e so o Pixel media. O ID de exemplo foi tirado ate deste
+         comentario de proposito, para quem auditar no futuro nao achar que o
+         problema voltou. Agora src/lib/analytics.js encontra o gtag e os
+         eventos do quiz caem no GA4 tambem. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3VTE6518"></script>
     <script>
       function gtag(){dataLayer.push(arguments)}
       gtag('js', new Date())
-      gtag('config', 'G-XXXXXXXXXX')
+      gtag('config', 'G-FW3VTE6518')
     </script>
-    -->
   </head>
   <body>
     <noscript>
